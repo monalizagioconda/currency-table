@@ -1,3 +1,5 @@
+const dataTableDiv = document.getElementById("data-table");
+
 async function fetchData() {
   const apiUrl = "https://api.nbp.pl/api/exchangerates/tables/a?format=json";
   const response = await fetch(apiUrl);
@@ -7,26 +9,14 @@ async function fetchData() {
 }
 
 async function main() {
-  const obj = await fetchData();
-  const tableNum = obj.no;
-  const ratesArr = obj.rates;
+  const { no, rates } = await fetchData();
 
-  document.getElementById("date").innerHTML = tableNum;
+  document.getElementById("date").innerHTML = no;
 
-  ratesArr.forEach(renderRate);
+  rates.forEach(renderRate);
 }
 
-function renderRate(element) {
-  const code = element.code;
-  const currency = element.currency;
-  const price = element.mid;
-
-  addRateContent(code, currency, price);
-}
-
-const dataTableDiv = document.getElementById("data-table");
-
-function addRateContent(code, currency, price) {
+function renderRate({ code, currency, mid: price }) {
   const el = document.createElement("div");
   el.classList.add("rate");
 

@@ -21,12 +21,12 @@ function renderRate(element) {
   const currency = element.currency;
   const price = element.mid;
 
-  addRateContent(code, currency, price, dataTableDiv);
+  addRateContent(code, currency, price);
 }
 
 const dataTableDiv = document.getElementById("data-table");
 
-function addRateContent(code, currency, price, dataTableDiv) {
+function addRateContent(code, currency, price) {
   const el = document.createElement("div");
   el.classList.add("rate");
 
